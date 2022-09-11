@@ -1,5 +1,5 @@
 /*
- * Arduino Mini 3.3V 8MHz bitbanging the 3-wire CISO connection to the Max19777 to aquire 12b ADC readings
+ * Arduino Mini 3.3V 8MHz bitbanging the 3-wire CIPO connection to the Max19777 to aquire 12b ADC readings
  */
 
 #include <Arduino.h>
@@ -21,7 +21,7 @@ void print_binary(uint16_t data_in) {
   }
 }
 
-// Simple for loop that toggles the clock then inspects the CISO pin
+// Simple for loop that toggles the clock then inspects the CIPO pin
 double bitBangData(uint16_t* _rx_low, uint16_t* _rx_high)  // This function transmit the data via bitbanging
 {
   double execution_time_us = 0;
@@ -36,7 +36,7 @@ double bitBangData(uint16_t* _rx_low, uint16_t* _rx_high)  // This function tran
     digitalWrite(SCK, LOW);                   // SCK low
     // delayMicroseconds(1); // t2 > 5ns
     digitalWrite(SCK, HIGH);
-    bitWrite((*_rx_high), idx, digitalRead(SDI)); // Capture MISO
+    bitWrite((*_rx_high), idx, digitalRead(SDI)); // Capture CIPO
   } 
   unsigned long time_end = micros();
   digitalWrite(CS_B, HIGH);
